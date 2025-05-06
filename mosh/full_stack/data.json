@@ -1,0 +1,10 @@
+{
+    "name": "the docker course",
+    "price": 10,
+    "is_published": true,
+    "tags":["docker", "devops", "kubernetes"],
+    "author": {
+        "name": "John Doe",
+        "age": 30
+    }
+}

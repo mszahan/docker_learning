@@ -13,6 +13,9 @@ RUN chown -R app:app /app
 # Switch to non-root user
 USER app
 
+# create directory for the volume
+RUN mkdir data
+
 # Install dependencies
 RUN npm install
 

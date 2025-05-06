@@ -1,0 +1,11 @@
+---
+name: The docker course
+price: 10
+is_published: true
+tags:
+  - docker
+  - devops
+  - backend
+author:
+  name: John Doe
+  age: 30
