@@ -1,20 +1,37 @@
-FROM node:slim
+FROM node:alpine3.20
 
-# Create non-root user
-RUN groupadd -r app && useradd -m -r -g app app
 
-WORKDIR /app
-
-# Copy files and install dependencies as root
-COPY package*.json ./
-RUN npm install
-COPY . .
-
-# Make sure the app directory is owned by the app user
-RUN chown -R app:app /app
-
-# Now switch to the app user
+RUN addgroup app && adduser -S -G app app
 USER app
 
-EXPOSE 3001
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . . 
+
+EXPOSE 3001 
+
 CMD ["npm", "start"]
+
+
+
+# FROM node:slim
+
+# # Create non-root user
+# RUN groupadd -r app && useradd -m -r -g app app
+
+# WORKDIR /app
+
+# # Copy files and install dependencies as root
+# COPY package*.json ./
+# RUN npm install
+# COPY . .
+
+# # Make sure the app directory is owned by the app user
+# RUN chown -R app:app /app
+
+# # Now switch to the app user
+# USER app
+
+# EXPOSE 3001
+# CMD ["npm", "start"]
