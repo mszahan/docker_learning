@@ -11,6 +11,7 @@ RUN npm install
 
 COPY . . 
 RUN chown -R app:app /app
+# RUN chmod +x docker-entrypoint.sh
 
 USER app
 

@@ -1,0 +1,17 @@
+# step 1: Build the app
+FROM node:alpine3.20 AS build-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . . 
+ENV VITE_API_URL=https://ip-address:3001/api
+RUN npm run build
+
+# step 2: Serve the app with nginx server
+FROM nginx:alpine
+RUN addgroup app && adduser -S -G app app
+USER app
+COPY --from=build-stage /app/build /usr/share/nginx/html
+EXPOSE 80 
+# RUN chown -R app:app /app
+ENTRYPOINT [ "nginx" , "-g", "daemon off;" ]
