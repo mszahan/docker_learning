@@ -1,13 +1,18 @@
 FROM node:alpine3.20
 
-
 RUN addgroup app && adduser -S -G app app
-USER app
 
 WORKDIR /app
+
+# Copy files as root
 COPY package*.json ./
+
 RUN npm install
+
 COPY . . 
+RUN chown -R app:app /app
+
+USER app
 
 EXPOSE 3001 
 
